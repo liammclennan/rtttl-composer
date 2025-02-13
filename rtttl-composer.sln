@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rtttl-composer-web", "rtttl-composer-web\rtttl-composer-web.csproj", "{4A25399E-F3F9-4E44-92B5-D6AC4037F938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rtttl-composer-library", "rtttl-composer-library\rtttl-composer-library.csproj", "{85C7840A-601A-4679-A0F2-873A6DE8F5A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rtttl-tests", "rtttl-tests\rtttl-tests.csproj", "{69524EE4-CCCC-4EDF-A981-83438E7FED29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A25399E-F3F9-4E44-92B5-D6AC4037F938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A25399E-F3F9-4E44-92B5-D6AC4037F938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A25399E-F3F9-4E44-92B5-D6AC4037F938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A25399E-F3F9-4E44-92B5-D6AC4037F938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85C7840A-601A-4679-A0F2-873A6DE8F5A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85C7840A-601A-4679-A0F2-873A6DE8F5A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85C7840A-601A-4679-A0F2-873A6DE8F5A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85C7840A-601A-4679-A0F2-873A6DE8F5A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69524EE4-CCCC-4EDF-A981-83438E7FED29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69524EE4-CCCC-4EDF-A981-83438E7FED29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69524EE4-CCCC-4EDF-A981-83438E7FED29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69524EE4-CCCC-4EDF-A981-83438E7FED29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
