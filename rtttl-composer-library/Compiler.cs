@@ -22,7 +22,11 @@ public static class Compiler
         return TimeSpan.FromMilliseconds(noteLength.MeasureFraction switch
         {
             MeasureFraction.Whole => 4 * msPerBeat,
-            _ => 1,
+            MeasureFraction.Half => 2 * msPerBeat,
+            MeasureFraction.Quarter => msPerBeat,
+            MeasureFraction.Eighth => msPerBeat / 2,
+            MeasureFraction.Sixteenth => msPerBeat / 4,
+            MeasureFraction.ThirtySecond => msPerBeat / 8,
         } * (noteLength.Dotted ? 1.5 : 1));
     }
     
