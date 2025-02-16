@@ -2,7 +2,46 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form method="post" action="/home/compose">
+    <div class="lCol">
+        <textarea class="score" id="rtttl" name="rtttl" spellcheck="false">8e2 8#d2 8e2 8#d2 8e2 8b1 8d2 8c2 4a1 8- 8c1 8e1 8a1 4b1 8- 8e1 8#g1 8b1 4c2 8- 8e1 8e2 8#d2 8e2 8#d2 8e2 8b1 8d2 8c2 4a1 8- 8c1 8e1 8a1 4b1 8- 8e1 8c2 8b1 4a1</textarea>
+    </div>
+    <div class="rCol">
+        <h1>Nokia Ringtone Composer</h1>
+        <input type="submit" value="Play" id="play" name="play" />
+        <input type="submit" value="Download" name="download" />
+    </div>
+</form>
+
+@section Scripts {
+    <script type="text/javascript">
+    const playButton = document.querySelector("#play");
+    
+    function playHandler(event) {
+        event.preventDefault();
+        const input = document.querySelector("#rtttl");
+        const rtttl = input.value;
+        fetch("/Home/Compose", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ rtttl }),
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            return response.json();
+        }).then((response) => {
+            console.log(response);
+        });
+    }
+    
+    playButton.addEventListener("click", playHandler);
+    
+    
+    
+</script>
+}

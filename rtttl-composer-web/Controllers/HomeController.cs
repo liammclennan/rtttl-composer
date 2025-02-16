@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using rtttl_composer_library;
 using rtttl_composer_web.Models;
 
 namespace rtttl_composer_web.Controllers;
@@ -18,14 +19,18 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    /// <summary>
+    /// Return a model of the compiled tune to be interpreted by the client.
+    /// </summary>
+    [HttpPost]
+    public IActionResult Compose([FromBody] PlayModel playModel)
     {
-        return View();
+        Console.WriteLine("Home Composer " + playModel.rtttl);
+        return Json(Composer.RtttlToComposition(playModel.rtttl, 80));
     }
+}
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+public class PlayModel
+{
+    public string rtttl { get; set; }
 }
