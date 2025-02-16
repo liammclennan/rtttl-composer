@@ -34,14 +34,26 @@
             }
 
             return response.json();
-        }).then((response) => {
-            console.log(response);
-        });
+        }).then(play);
     }
     
     playButton.addEventListener("click", playHandler);
     
-    
+    function play(composition) {
+        const audioCtx = new AudioContext();
+        const oscillator = audioCtx.createOscillator();
+        oscillator.type = "square";
+        
+        let start = audioCtx.currentTime;
+        let elapsed = 0;
+        for (let token of composition.tokens) {
+            oscillator.frequency.setValueAtTime(token.frequencyHz, start + elapsed);
+            elapsed += token.duractionSeconds;
+        }
+        oscillator.frequency.setValueAtTime(0, start + elapsed);
+        oscillator.connect(audioCtx.destination);
+        oscillator.start();
+    }
     
 </script>
 }
