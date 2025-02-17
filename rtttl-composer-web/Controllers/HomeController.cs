@@ -25,7 +25,7 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Compose([FromBody] PlayModel playModel)
     {
-        return Json(Composer.RtttlToComposition(playModel.rtttl, 80));
+        return Json(Composer.RtttlToComposition(playModel.rtttl, 120));
     }
 }
 
