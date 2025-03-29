@@ -19,7 +19,7 @@ public class Compilation
     {
         Assert.Equal(
             durationSeconds,
-            Compiler.CompileNoteLengthSeconds(new NoteLength(measureFraction, dotted), bpm)
+            ToneDuration.CompileNoteLengthSeconds(new NoteLength(measureFraction, dotted), bpm)
         );
     }
     

@@ -29,28 +29,26 @@ public readonly record struct RtttlToken(NoteLength NoteLength, Tone? Tone); // 
 
 public static class RtttlParser
 {
+    //s Parse a space separated list of tokens.
     public static RtttlToken[] Parse(string rtttl)
     {
-        // a validation step could go here
         return rtttl.Split(' ').Select(ParseToken).ToArray();
     }
 
+    // Parse a token like '16.#d2'.
     static RtttlToken ParseToken(string rtttl)
     {
-        rtttl = rtttl.Trim();
-        var exp = new Regex(@"(?<MeasureFraction>\d+)(?<Dot>\.?)(?<Note>#?\w)?(?<OctaveOrRest>[1|2|3|4|-]?)");
-        var match = exp.Match(rtttl);
+        var match = new Regex(
+            @"(?<MeasureFraction>\d+)(?<Dot>\.?)(?<Note>#?\w)?(?<OctaveOrRest>[1|2|3|4|-]?)"
+        ).Match(rtttl.Trim());
 
-        if (!match.Success)
-        {
-            throw new Exception("Failed to parse token" + rtttl);
-        }
-
-        var octaveOrRest = ToOctave(match.Groups["OctaveOrRest"].Value);
+        if (!match.Success) throw new Exception("Failed to parse token" + rtttl);
 
         return new RtttlToken(
-            new NoteLength(ToMeasureFraction(match.Groups["MeasureFraction"].Value), match.Groups["Dot"].Value.Equals(".")), 
-            octaveOrRest is { } o 
+            new NoteLength(ToMeasureFraction(
+                match.Groups["MeasureFraction"].Value), 
+                match.Groups["Dot"].Value.Equals(".")), 
+            ToOctave(match.Groups["OctaveOrRest"].Value) is { } o 
                 ? new Tone(ToNote(match.Groups["Note"].Value), o)
                 : null
         );
@@ -87,7 +85,6 @@ public static class RtttlParser
             "g" => Note.G,
             "#g" => Note.GSharp,
             _ => throw new Exception("Unable to parse note " + input)
-
         };
     }
 
@@ -100,7 +97,6 @@ public static class RtttlParser
             "3" => Octave.Three,
             "4" => Octave.Four,
             "-" => null,
-            "" => Octave.Two,
             _ => throw new Exception("Unable to parse octave or rest " + input)
         };
     }
