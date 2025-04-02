@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 using rtttl_composer_library;
 using rtttl_composer_web.Models;
 
@@ -25,7 +27,14 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Compose([FromBody] PlayModel playModel)
     {
-        return Json(Composer.RtttlToComposition(playModel.rtttl, 120));
+        return Json(Composer.RtttlToComposition(playModel.rtttl));
+    }
+
+    [HttpPost]
+    public IActionResult Download([FromBody] PlayModel playModel)
+    {
+        var ms = Composer.ToBuffer(playModel.rtttl);
+        return File(ms, "audio/x-wav", "ringtone.wav");
     }
 }
 

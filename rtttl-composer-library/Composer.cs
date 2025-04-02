@@ -6,15 +6,17 @@ public class Composer
     {
         var parsed = RtttlParser.Parse(rtttl);
         var compiled = Compiler.Compile(parsed, tempoBpm, oscillationType);
-        return new Composition(tempoBpm, compiled);
+        return new Composition(tempoBpm, compiled.ToArray());
     }
     
     public static MemoryStream ToBuffer(string rtttl, int tempoBpm = 120, OscillationType oscillationType = OscillationType.Square)
     {
+        // TODO: Oscillation type is ignored in this branch
         var parsed = RtttlParser.Parse(rtttl);
         var compiled = Compiler.Compile(parsed, tempoBpm, oscillationType);
-        
-        return new Composition(tempoBpm, compiled);
+        var buffer = PcmAudio.PackWaveBuffer(compiled);
+        buffer.Seek(0, SeekOrigin.Begin);
+        return buffer;
     }
 }
 

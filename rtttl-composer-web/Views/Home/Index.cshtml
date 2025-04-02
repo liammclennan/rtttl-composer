@@ -9,14 +9,14 @@
     <div class="rCol">
         <h1>Nokia Ringtone Composer</h1>
         <input type="submit" value="Play" id="play" name="play" />
-        <input type="submit" value="Download" name="download" />
+        <input type="submit" value="Download" id="download" name="download" />
     </div>
 </form>
 
 @section Scripts {
     <script type="text/javascript">
-    const playButton = document.querySelector("#play");
-    
+
+
     function playHandler(event) {
         event.preventDefault();
         const input = document.querySelector("#rtttl");
@@ -37,7 +37,30 @@
         }).then(play);
     }
     
-    playButton.addEventListener("click", playHandler);
+    function downloadHandler(event) {
+        event.preventDefault();
+        const input = document.querySelector("#rtttl");
+        const rtttl = input.value;
+        fetch("/Home/Download/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ rtttl }),
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.blob();
+        }).then((blob) => {
+            var file = window.URL.createObjectURL(blob);
+            window.location.assign(file);
+        })
+        .catch((error) => console.log(error));
+    }
+    
+    document.querySelector("#play").addEventListener("click", playHandler);
+    document.querySelector("#download").addEventListener("click", downloadHandler);
     
     function play(composition) {
         const audioCtx = new AudioContext();
