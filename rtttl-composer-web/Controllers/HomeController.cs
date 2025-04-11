@@ -27,13 +27,13 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Compose([FromBody] PlayModel playModel)
     {
-        return Json(Composer.RtttlToComposition(playModel.rtttl));
+        return Json(Composer.RtttlToComposition(playModel.rtttl, playModel.bpm ?? 120));
     }
 
     [HttpPost]
     public IActionResult Download([FromBody] PlayModel playModel)
     {
-        var ms = Composer.ToBuffer(playModel.rtttl);
+        var ms = Composer.ToBuffer(playModel.rtttl, playModel.bpm ?? 120);
         return File(ms, "audio/x-wav", "ringtone.wav");
     }
 }
@@ -41,4 +41,5 @@ public class HomeController : Controller
 public class PlayModel
 {
     public string rtttl { get; set; }
+    public int? bpm { get; set; }
 }

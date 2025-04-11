@@ -16,18 +16,18 @@
 @section Scripts {
     <script type="text/javascript">
 
-
     function playHandler(event) {
         event.preventDefault();
         const input = document.querySelector("#rtttl");
         const rtttl = input.value;
+        const bpm = new URLSearchParams(window.location.search).get('bpm');
         fetch("/Home/Compose", {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ rtttl }),
+            body: JSON.stringify({ rtttl, bpm }),
         }).then((response) => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -41,12 +41,13 @@
         event.preventDefault();
         const input = document.querySelector("#rtttl");
         const rtttl = input.value;
+        const bpm = new URLSearchParams(window.location.search).get('bpm');
         fetch("/Home/Download/", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ rtttl }),
+            body: JSON.stringify({ rtttl, bpm }),
         }).then((response) => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
