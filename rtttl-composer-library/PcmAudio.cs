@@ -43,7 +43,7 @@ public static class PcmAudio
         const int sixteenBitSampleLimit = 32767;
         const int sampleRate = 44100;
 
-        return Enumerable.Range(1, Convert.ToInt32(sound.DuractionSeconds * sampleRate))
+        return Enumerable.Range(1, Convert.ToInt32(sound.DurationSeconds * sampleRate))
             .Select(ToAmplitude)
             .ToArray();
 

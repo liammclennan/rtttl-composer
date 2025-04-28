@@ -93,7 +93,7 @@ public static class RtttlParser
         return input switch
         {
             "1" => Octave.One,
-            "2" => Octave.Two,
+            "2" or "" => Octave.Two,
             "3" => Octave.Three,
             "4" => Octave.Four,
             "-" => null,

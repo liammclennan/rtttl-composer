@@ -72,7 +72,7 @@
         let elapsed = 0;
         for (let token of composition.tokens) {
             oscillator.frequency.setValueAtTime(token.frequencyHz, start + elapsed);
-            elapsed += token.duractionSeconds;
+            elapsed += token.durationSeconds;
         }
         oscillator.frequency.setValueAtTime(0, start + elapsed);
         oscillator.connect(audioCtx.destination);

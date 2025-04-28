@@ -20,4 +20,4 @@ public enum OscillationType
     Triangle,
 }
 
-public readonly record struct SoundToken(int FrequencyHz, Double DuractionSeconds, OscillationType OscillationType);
+public readonly record struct SoundToken(int FrequencyHz, Double DurationSeconds, OscillationType OscillationType);
